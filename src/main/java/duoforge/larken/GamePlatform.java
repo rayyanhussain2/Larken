@@ -13,84 +13,154 @@ import java.security.Key;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class GamePlatform{
-    private final ArrayList<Rectangle> platforms = new ArrayList<>();
+public class GamePlatform implements Runnable{
+    public final ArrayList<Rectangle> platforms;
 
     private final Rectangle platform1;
+
+    public ArrayList<Rectangle> getPlatforms() {
+        return platforms;
+    }
+
+
+    public Rectangle getPlatform1() {
+        return platform1;
+    }
+
+    public Rectangle getPlatform2() {
+        return platform2;
+    }
+
+    public Rectangle getPlatform3() {
+        return platform3;
+    }
+
+    public Integer getWidth() {
+        return width;
+    }
+
+    public Integer getContainerWidth() {
+        return containerWidth;
+    }
+
+    public Integer getMin() {
+        return min;
+    }
+
+    public Integer getMax() {
+        return max;
+    }
+
+    public static boolean isInstanceCreated() {
+        return instanceCreated;
+    }
+
+    public static void setInstanceCreated(boolean instanceCreated) {
+        GamePlatform.instanceCreated = instanceCreated;
+    }
+
+    public Random getRand() {
+        return rand;
+    }
+
+    public void setRand(Random rand) {
+        this.rand = rand;
+    }
+
+    public Integer getAnimDuration() {
+        return animDuration;
+    }
+
+    public void setAnimDuration(Integer animDuration) {
+        this.animDuration = animDuration;
+    }
+
     private final Rectangle platform2;
     private final Rectangle platform3;
-    private final Rectangle platform4;
 
-    public GamePlatform(Rectangle iplatform1, Rectangle iplatform2, Rectangle iplatform3, Rectangle iplatform4){
-        this.platform1 = iplatform1;
-        this.platform2 = iplatform2;
-        this.platform3 = iplatform3;
-        this.platform4 = iplatform4;
+    //Game details
+    private final Integer width;
+    private final Integer containerWidth;
+    private final Integer min;
+    private final Integer max;
+
+    private static boolean instanceCreated = false;
+
+    private Random rand;
+
+    private Integer animDuration;
+
+    private GamePlatform(Rectangle _platform1, Rectangle _platform2, Rectangle _platform3){
+        this.platforms = new ArrayList<>();
+        this.platform1 = _platform1;
+        this.platform2 = _platform2;
+        this.platform3 = _platform3;
+        this.width = 360;
+        this.containerWidth = 360 / 2;
+        this.min = 40; //depends on character
+        this.max = 150; // i dont know what to do with this
+        this.setRand(new Random());
+        this.setAnimDuration(1000);
+    }
+
+    static GamePlatform returnInstance(Rectangle _platform1, Rectangle _platform2, Rectangle _platform3){
+        if (!instanceCreated){
+            instanceCreated = true;
+            return new GamePlatform(_platform1, _platform2, _platform3);
+        }
+        return null;
     }
 
     public void setPlatformsInitial(){
-        int width = 840;
-        int containerwidth = 280;
         int multiple = 0;
-        int min = 40;
-        int max = 120;
-        Random rand = new Random();
 
         this.platform1.setX(0);
         this.platform1.setWidth(rand.nextInt(max - min + 1) + min);
         multiple += 1;
 
-        this.platform2.setX((multiple * containerwidth) + (rand.nextInt(160)));
+        this.platform2.setX((multiple * containerWidth) + (rand.nextInt(containerWidth - max)));
         this.platform2.setWidth(rand.nextInt(max - min + 1) + min);
         multiple += 1;
 
-        this.platform3.setX((multiple * containerwidth) + (rand.nextInt(160)));
+        this.platform3.setX((multiple * containerWidth) + (rand.nextInt(containerWidth - max)));
         this.platform3.setWidth(rand.nextInt(max - min + 1) + min);
         multiple += 1;
 
-        this.platform4.setX((multiple * containerwidth) + (rand.nextInt(160)));
-        this.platform4.setWidth(rand.nextInt(max - min + 1) + min);
 
-        platforms.add(platform1);
-        platforms.add(platform2);
-        platforms.add(platform3);
-        platforms.add(platform4);
+        platforms.add(0, platform1);
+        platforms.add(1, platform2);
+        platforms.add(2, platform3);
     }
 
-    public void shiftPlatforms(){
-        Rectangle temp1 = platforms.get(0);
-        Rectangle temp2 = platforms.get(1);
-        Rectangle temp3 = platforms.get(2);
-        Rectangle temp4 = platforms.get(3);
+    @Override
+    public void run() {
+            Rectangle temp1 = platforms.get(0);
+            Rectangle temp2 = platforms.get(1);
+            Rectangle temp3 = platforms.get(2);
 
-        Duration transitionDuration = Duration.millis(1000);
-        Timeline timeline = new Timeline();
+            Duration transitionDuration = Duration.millis(animDuration);
+            Timeline timeline = new Timeline();
 
-        KeyFrame shiftPillar = new KeyFrame(transitionDuration,
-                new KeyValue(temp1.xProperty(), -280),
-                new KeyValue(temp2.xProperty(), 0),
-                new KeyValue(temp3.xProperty(), 280),
-                new KeyValue(temp4.xProperty(), 2 * 280)
+            KeyFrame shiftPillar = new KeyFrame(transitionDuration,
+                    new KeyValue(temp1.xProperty(), -this.containerWidth),
+                    new KeyValue(temp2.xProperty(), 0),
+                    new KeyValue(temp3.xProperty(), (this.containerWidth) + (rand.nextInt(containerWidth - max)))
 
-        );
-        timeline.getKeyFrames().add(shiftPillar);
-        timeline.play();
+            );
+            timeline.getKeyFrames().add(shiftPillar);
+            timeline.play();
 
-
-        timeline.setOnFinished(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                Random rand = new Random();
-                temp1.setX((5 * 168) + (rand.nextInt(49)));
-                temp1.setWidth(rand.nextInt(121 - 40 + 1) + 40);
-
-                platforms.add(0, temp2);
-                platforms.add(1, temp3);
-                platforms.add(2, temp4);
-                platforms.add(5, temp1);
-            }
-        });
+            //update the temp1 coordinates to go somewhere else
+            timeline.setOnFinished(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+                    temp1.setX((2 * containerWidth) + (rand.nextInt(containerWidth - max)));
+                    temp1.setWidth(rand.nextInt(max - min + 1) + min);
+                    platforms.add(0, temp2);
+                    platforms.add(1, temp3);
+                    platforms.add(2, temp1);
+                }
+            });
 
     }
-
 }
