@@ -15,7 +15,7 @@ public class Background implements Runnable{
     public ImageView getbg1() {
         return bg1;
     }
-    private static ArrayList<ArrayList<String>> backgroundSRC = new ArrayList<>();
+    private static ArrayList<ArrayList<String>> backgroundSRC = new ArrayList<>(5);
 
     public void setbg1(ImageView bg1) {
         this.bg1 = bg1;
@@ -37,41 +37,45 @@ public class Background implements Runnable{
         this.layer3 = layer3;
     }
 
+    private static boolean staticSet = false;
     public Background(ImageView bg1, ImageView bg2, int layerNO) {
         //set up the array. Have another function for setting it
-        ArrayList<String> summer1 = new ArrayList<>();
-        summer1.add("summer1_1.png");
-        summer1.add("summer1_2.png");
-        summer1.add("summer1_3.png");
+        if(!staticSet) {
+            ArrayList<String> summer1 = new ArrayList<>();
+            summer1.add("summer_1_1.png");
+            summer1.add("summer_1_2.png");
+            summer1.add("summer_1_3.png");
 
 
-        ArrayList<String> summer2 = new ArrayList<>();
-        summer2.add("summer2_1.png");
-        summer2.add("summer2_2.png");
-        summer2.add("summer2_3.png");
+            ArrayList<String> summer2 = new ArrayList<>();
+            summer2.add("summer_2_1.png");
+            summer2.add("summer_2_2.png");
+            summer2.add("summer_2_3.png");
 
 
-        ArrayList<String> summer3 = new ArrayList<>();
-        summer3.add("summer3_1.png");
-        summer3.add("summer3_2.png");
-        summer3.add("summer3_3.png");
+            ArrayList<String> summer3 = new ArrayList<>();
+            summer3.add("summer_3_1.png");
+            summer3.add("summer_3_2.png");
+            summer3.add("summer_3_3.png");
 
-        ArrayList<String> summer4 = new ArrayList<>();
-        summer4.add("summer4_1.png");
-        summer4.add("summer4_2.png");
-        summer4.add("summer4_3.png");
+            ArrayList<String> summer4 = new ArrayList<>();
+            summer4.add("summer_4_1.png");
+            summer4.add("summer_4_2.png");
+            summer4.add("summer_4_3.png");
 
-        ArrayList<String> cloud = new ArrayList<>();
-        cloud.add("cloud_1.png");
-        cloud.add("cloud_2.png");
-        cloud.add("cloud_3.png");
+            ArrayList<String> cloud = new ArrayList<>();
+            cloud.add("cloud_1.png");
+            cloud.add("cloud_2.png");
+            cloud.add("cloud_3.png");
 
 
-        backgroundSRC.add(0, summer1);
-        backgroundSRC.add(1, summer2);
-        backgroundSRC.add(2, summer3);
-        backgroundSRC.add(3, summer4);
-        backgroundSRC.add(4,cloud);
+            backgroundSRC.add(0, summer1);
+            backgroundSRC.add(1, summer2);
+            backgroundSRC.add(2, summer3);
+            backgroundSRC.add(3, summer4);
+            backgroundSRC.add(4, cloud);
+            staticSet = true;
+        }
         this.layer = layerNO;
 
 
@@ -85,8 +89,10 @@ public class Background implements Runnable{
 
     private Integer layer;
     public void setBG(int ind1, int ind2){
-        this.bg1.setImage(new Image(backgroundSRC.get(ind1).get(layer)));
-        this.bg2.setImage(new Image(backgroundSRC.get(ind2).get(layer)));
+        System.out.println(backgroundSRC.get(ind1).get(this.layer));
+        System.out.println(backgroundSRC.get(ind2).get(this.layer));
+        this.bg1.setImage(new Image(backgroundSRC.get(ind1).get(this.layer)));
+        this.bg2.setImage(new Image(backgroundSRC.get(ind2).get(this.layer)));
     }
 
     private ImageView bg1;

@@ -4,6 +4,7 @@ import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
@@ -71,7 +72,7 @@ public class PlayableCharacter implements Runnable{
         Pass the pilars class to use its information
    */
     //Fix this for accounting up and down
-    public void walkStickEnd(Timeline t1, double stickHeight){
+    public void walkStickEnd(SoundFX s, Timeline t1, double stickHeight){
         fail = false;
         Duration transitionDuration = Duration.millis(animDuration);
         KeyFrame goNextPillar = new KeyFrame(transitionDuration,
@@ -86,6 +87,7 @@ public class PlayableCharacter implements Runnable{
             public void handle(long l) {
                 System.out.println("Debug x: " + character.getX());
                 if(character.getScaleY() == -1 && character.getX() >= (secondX - character.getFitWidth()) ){
+                    Platform.runLater(s);
                     t1.stop();
                     KeyFrame empty = new KeyFrame(transitionDuration, new KeyValue(character.yProperty(), 1000));
                     t1.getKeyFrames().remove(0);
@@ -115,7 +117,7 @@ public class PlayableCharacter implements Runnable{
 
         //Fix this for accounting up and down
     AnimationTimer at;
-    public void goNextPillar(Collectible c1, Timeline t1, double xCoordinates, double firstX, double firstWidth, double secondX, double secondWidth){
+    public void goNextPillar(SoundFX s, Collectible c1, Timeline t1, double xCoordinates, double firstX, double firstWidth, double secondX, double secondWidth){
         //updating imp attributes
         fail = false;
         this.firstX = firstX;
@@ -125,7 +127,7 @@ public class PlayableCharacter implements Runnable{
         Duration transitionDuration = Duration.millis(animDuration);
 
         KeyFrame goNextPillar = new KeyFrame(transitionDuration,
-                new KeyValue(character.xProperty(), secondX + secondWidth - this.character.getFitWidth())
+                new KeyValue(character.xProperty(), secondX + secondWidth - (this.character.getFitWidth() * 2/3))
         );
         t1.getKeyFrames().add(goNextPillar);
         Timeline t2 = new Timeline();
@@ -134,6 +136,7 @@ public class PlayableCharacter implements Runnable{
             public void handle(long l) {
                 //System.out.println("Debug x: " + character.getX());
                 if(character.getScaleY() == c1.isBottom() && character.getX() > c1.getCollectibleX()){
+                    Platform.runLater(s);
                     c1.makeInvisible();
                     c1.setCollected(true);
                     c1.setTotalCollected();
@@ -172,7 +175,7 @@ public class PlayableCharacter implements Runnable{
 
     //Falls down - fix it
     public void fall(Timeline t1){
-        Duration transitionDuration1 = Duration.millis(100);
+        Duration transitionDuration1 = Duration.millis(1500);
 
         KeyFrame walkTillAir = new KeyFrame(transitionDuration1,
                 new KeyValue(character.xProperty(), character.getX() + character.getFitWidth())

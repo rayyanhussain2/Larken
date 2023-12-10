@@ -119,7 +119,7 @@ public class Stick implements Runnable {
         double originalX = this.stick.getX();
 
         if(stick.getHeight() < secondX - firstWidth){
-            KeyFrame rotate = new KeyFrame(Duration.millis(100),
+            KeyFrame rotate = new KeyFrame(Duration.millis(1500),
                     new KeyValue(this.stick.rotateProperty(), 180),
                     new KeyValue(this.stick.xProperty(), stick.getHeight()/2 + firstWidth),
                     new KeyValue(this.stick.yProperty(), 1000)
@@ -128,6 +128,8 @@ public class Stick implements Runnable {
             stickAnimation = new Timeline();
             stickAnimation.getKeyFrames().add(rotate);
             stickAnimation.play();
+
+
             return -1;
         }else{
             KeyFrame rotate = new KeyFrame(transitionDuration1,

@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMousePressed="#onGameInput" onMouseReleased="#onGameInputRelease" onScroll="#invertChar" prefHeight="640.0" prefWidth="360.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duoforge.larken.Scene1">
@@ -40,24 +43,120 @@
             <Image url="@final_assets/backgrounds/cloud_3.png" />
          </image>
       </ImageView>
-      <Rectangle fx:id="platform1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="160.0" layoutY="480.0" stroke="BLACK" strokeType="INSIDE" width="120.0" />
-      <Rectangle fx:id="platform2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="160.0" layoutY="480.0" stroke="BLACK" strokeType="INSIDE" width="120.0" />
-      <ImageView fx:id="collectibleImage" fitHeight="38.0" fitWidth="36.0" layoutX="6.0" layoutY="462.0" pickOnBounds="true" preserveRatio="true">
+      <Rectangle fx:id="platform1" arcHeight="5.0" arcWidth="5.0" height="160.0" layoutY="480.0" stroke="#3f4639" strokeType="INSIDE" width="120.0">
+         <fill>
+            <LinearGradient cycleMethod="REFLECT" endX="1.0" endY="0.8712121198574702">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.5333333611488342" green="0.6549019813537598" blue="0.5568627715110779" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7372549176216125" green="0.8470588326454163" blue="0.8901960849761963" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill></Rectangle>
+      <Rectangle fx:id="platform2" arcHeight="5.0" arcWidth="5.0" height="160.0" layoutY="480.0" stroke="#3f4639" strokeType="INSIDE" width="120.0">
+         <fill>
+            <LinearGradient cycleMethod="REFLECT" endX="1.0" endY="0.8712121198574702">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.5333333611488342" green="0.6549019813537598" blue="0.5568627715110779" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7372549176216125" green="0.8470588326454163" blue="0.8901960849761963" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill></Rectangle>
+      <ImageView fx:id="collectibleImage" fitHeight="25.0" fitWidth="25.0" layoutX="2.0" layoutY="468.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@final_assets/cherry.png" />
+            <Image url="@final_assets/coin.gif" />
          </image>
       </ImageView>
-      <ImageView fx:id="character" fitHeight="86.0" fitWidth="36.0" layoutY="394.0" pickOnBounds="true">
+      <ImageView fx:id="character" fitHeight="86.0" fitWidth="36.0" layoutX="4.0" layoutY="394.0" pickOnBounds="true">
          <image>
             <Image url="@../../character_1_idle.gif" />
          </image>
       </ImageView>
-      <Rectangle fx:id="platform3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="160.0" layoutY="480.0" stroke="BLACK" strokeType="INSIDE" width="120.0" />
-      <Rectangle fx:id="stickAsset" arcHeight="5.0" arcWidth="5.0" fill="#a1662f" layoutX="-3.0" layoutY="480.0" stroke="BLACK" strokeType="INSIDE" width="5.0" />
-      <Pane fx:id="pauseMainPane" layoutX="-3.0" layoutY="1.0" prefHeight="0.0" prefWidth="0.0" style="-fx-background-color: black; -fx-opacity: 0.8;" />
-      <Text fx:id="currentScore" layoutX="262.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score" wrappingWidth="74.196533203125" />
-      <Text fx:id="collectiblesTotal" layoutX="262.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="49.0" />
-      <Button fx:id="reset" layoutX="-52.0" layoutY="-25.0" mnemonicParsing="false" onMouseClicked="#reset" text="Reset" />
-      <Button fx:id="revive" layoutX="-44.0" layoutY="-25.0" mnemonicParsing="false" onMouseClicked="#revive" text="Revive" />
+      <Rectangle fx:id="platform3" arcHeight="5.0" arcWidth="5.0" height="160.0" layoutY="480.0" stroke="#3f4639" strokeType="INSIDE" width="120.0">
+         <fill>
+            <LinearGradient cycleMethod="REFLECT" endX="1.0" endY="0.8712121198574702">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.5333333611488342" green="0.6549019813537598" blue="0.5568627715110779" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7372549176216125" green="0.8470588326454163" blue="0.8901960849761963" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill></Rectangle>
+      <Rectangle fx:id="stickAsset" arcHeight="5.0" arcWidth="5.0" fill="#a16530" layoutX="-3.0" layoutY="480.0" stroke="TRANSPARENT" strokeType="INSIDE" width="5.0" />
+      <Text fx:id="currentScore" fill="WHITE" layoutX="14.0" layoutY="75.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="2.0" text="Score" wrappingWidth="120.0">
+         <font>
+            <Font size="24.0" />
+         </font></Text>
+      <Text fx:id="collectiblesTotal" fill="WHITE" layoutX="237.0" layoutY="74.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="2.0" text="Text" wrappingWidth="120.0">
+         <font>
+            <Font size="24.0" />
+         </font></Text>
+      <Pane fx:id="pauseMainPane" prefHeight="0.0" prefWidth="0.0" style="-fx-background-color: white; -fx-opacity: 0.9;" />
+      <ImageView fx:id="heroImage" fitHeight="106.0" fitWidth="317.0" layoutX="22.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../gameName.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="play" fitHeight="68.0" fitWidth="120.0" layoutX="131.0" layoutY="360.0" onMouseClicked="#playButton" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../play.png" />
+         </image>
+      </ImageView>
+      <Text fx:id="currHS" fill="WHITE" layoutX="156.0" layoutY="299.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="2.0" text="9999" wrappingWidth="49.0">
+         <font>
+            <Font name="Yu Gothic UI Semibold" size="20.0" />
+         </font></Text>
+      <ImageView fx:id="beatScore" fitHeight="44.0" fitWidth="269.0" layoutX="56.0" layoutY="206.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../beatthescore.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="play1" fitHeight="36.0" fitWidth="30.0" layoutX="-82.0" layoutY="49.0" onMouseClicked="#mainMenu" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../pause.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="reset" fitHeight="68.0" fitWidth="120.0" layoutX="131.0" layoutY="291.0" onMouseClicked="#reset" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../replay.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="revive" fitHeight="68.0" fitWidth="120.0" layoutX="131.0" layoutY="394.0" onMouseClicked="#revive" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../revive.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="failedImage" fitHeight="106.0" fitWidth="317.0" layoutX="36.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../failed.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="newHSImage" fitHeight="44.0" fitWidth="269.0" layoutX="56.0" layoutY="206.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../newhs.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

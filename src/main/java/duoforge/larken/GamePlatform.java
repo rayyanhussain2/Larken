@@ -98,7 +98,7 @@ public class GamePlatform implements Runnable{
         this.width = 360;
         this.containerWidth = 360 / 2;
         this.min = 40; //depends on character
-        this.max = 150; // i dont know what to do with this
+        this.max = 100; // i dont know what to do with this
         this.setRand(new Random());
         this.setAnimDuration(1000);
     }

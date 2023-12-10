@@ -27,6 +27,9 @@ public class Collectible implements Runnable {
 
     private Integer totalCollected;
 
+    public void initSet(Integer set){
+        totalCollected = set;
+    }
     public boolean isCollected() {
         return isCollected;
     }
@@ -71,15 +74,15 @@ public class Collectible implements Runnable {
             this.collectible.setVisible(true);
 
             this.collectible.setY(-20);
-            this.collectible.setX(rand.nextDouble(firstWidth, secondX));
+            this.collectible.setX(rand.nextDouble(firstWidth + 10, secondX - 10));
             this.isBottom = 1;
         }else if(random < 20){
             this.collectible.setVisible(true);
 
             //place down
-            this.collectible.setY(20);
-            this.collectible.setX(rand.nextDouble(firstWidth, secondX));
-            this.isBottom = -1;
+            this.collectible.setY(-20);
+            this.collectible.setX(rand.nextDouble(firstWidth + 10, secondX - 10));
+            this.isBottom = 1;
 
         }else{
             this.collectible.setVisible(false);
