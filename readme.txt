@@ -1,3 +1,10 @@
+Credits
+UI elements, Fonts, Audio sourcing - Prabal Minotra
+Rest - Rayyan Hussain
+
+Assets sourced from https://craftpix.net/file-licenses/
+
+
 # AP Endsem Project Group 69
 ## Game Name: ADJUNGO 
 (Latin) Adjungo means to connect\
