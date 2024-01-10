@@ -1,10 +1,3 @@
-Credits
-UI elements, Fonts, Audio sourcing - Prabal Minotra
-Rest - Rayyan Hussain
-
-Assets sourced from https://craftpix.net/file-licenses/
-
-
 # AP Endsem Project Group 69
 ## Game Name: ADJUNGO 
 (Latin) Adjungo means to connect\
@@ -13,7 +6,6 @@ Assets sourced from https://craftpix.net/file-licenses/
 - Rayyan Hussain 2022399
 - Prabal Minotra 2022357
 
-Explaining clearly how your code is supposed to be compiled and run from cmd.
 ## To Run
 HOME_FOLDER = Larken
 1. Download the entire assignment and unzip
@@ -95,6 +87,7 @@ $ java -jar
 ## Assets
 
 - Sourced from [CraftPix](https://craftpix.net/file-licenses/) and [Pixabay](https://pixabay.com/service/license-summary/).
+- Assets sourced from https://craftpix.net/file-licenses/
 
 ## Usage
 
